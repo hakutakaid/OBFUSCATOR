@@ -1,0 +1,23 @@
+#!/bin/bash
+
+branch=$(git symbolic-ref --short HEAD)
+backup_branch="backup_$(date +%Y%m%d_%H%M%S)"
+
+git branch "$backup_branch"
+echo "📦 Backup branch dibuat: $backup_branch"
+
+git checkout --orphan temp_branch
+
+git add -A
+
+git commit -m "+×>÷[÷]]÷[÷×}}÷}×}]×]×]]"
+
+git branch -D "$branch" 2>/dev/null
+git push origin --delete "$branch" 2>/dev/null
+
+git branch -m "$branch"
+
+git push -f origin "$branch"
+
+echo "✅ Branch '$branch' di-reset sepenuhnya (history bersih)."
+echo "🗂  Backup lama tersimpan di branch '$backup_branch' kalau mau dikembalikan."
